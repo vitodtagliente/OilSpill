@@ -8,6 +8,9 @@ function [FIPM] = spillfipm( img )
 % Numero di pixel pari a 1 dell'immagine
 n = numel( perim(:) ); 
 
+% TODO: devo applicare la maschera del perimetro
+% all'immagine originale
+
 % Dimensioni dell'immagine
 [nrows, ncols] = size( img );
 

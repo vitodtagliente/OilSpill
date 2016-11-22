@@ -9,5 +9,5 @@ function[] = spillfeatures( img )
 % Calcola le 4 categorie di features
 
 % 1. Features Geometriche
-[perim, area, complexity] = spillgeom( img );
+[perim, area, complexity, FIPM, EL, EW, EA] = spillgeom( img );
 
