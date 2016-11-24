@@ -9,12 +9,14 @@ if nargin <= 1
    debug = false; 
 end
 
-props = regionprops(img, 'Orientation', 'MajorAxisLength', ...
+[p, pimg] = spillperim( img );
+
+props = regionprops(pimg, 'Orientation', 'MajorAxisLength', ...
     'MinorAxisLength', 'Eccentricity', 'Centroid');
 
 % Rappresentazioni grafiche delle ellissi
 if debug
-    imshow( img );
+    imshow( pimg );
     hold on;
 
     phi = linspace(0,2*pi,50);
