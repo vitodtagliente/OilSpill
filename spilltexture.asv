@@ -27,4 +27,4 @@ entropy = features.entro;
 correlation = features.corrm;
 
 % 5. Dissimilarity
-dissimilarity = features.dissi;
+dissimi
