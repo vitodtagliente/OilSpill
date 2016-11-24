@@ -1,0 +1,15 @@
+
+function [ oyut ] = spillbackscatter( spill, back )
+% Inside Slick Standard Deviation
+isd = mean (std( double( spill ) ) );
+
+% Inside Slick Radar Backcatter
+imd = mean( mean( spill ) );
+
+% Outside Slick Standard Deviation (?sce)
+osd = mean( std( double( back ) ) );
+
+% Outside Slick Radar Backscatter (?sce)
+omd = mean( mean( back ) );
+
+% Intensity Ratio
