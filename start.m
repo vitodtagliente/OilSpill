@@ -8,3 +8,8 @@ img = imread( 'oil.bmp' );
 gimg = rgb2gray( img );
 % s: immagine segmentata
 s = spillseg( img );
+
+% Calcolo dell'immagine di background
+back = spillback( img, s );
+% Immagine di background in scala di grigi
+gback = rgb2gray( back );
