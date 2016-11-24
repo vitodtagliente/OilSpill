@@ -2,8 +2,8 @@
 % Calcolo dei parametri basati sulla Matrice di 
 % co-occorrenza dei livelli di grigio
 
-function [homogeneity, contrast, entropy, correlation, dissimilarity]= spilltexture(img)
-glcm = graycomatrix(img);
+function [ out ] = spilltexture(img)
+out.GLCM = graycomatrix(img);
 
 % Codice base di Matlab
 % stats = graycoprops(glcm);
@@ -12,19 +12,19 @@ glcm = graycomatrix(img);
 % Le features sono state calcolate utilizzando
 % uno script esterno
 
-features = glcmfeatures( glcm, 0 );
+features = glcmfeatures( out.GLCM, 0 );
 
 % 1. Homogeneity
-homogeneity = features.homom;
+out.Homogeneity = features.homom;
 
 % 2. Contrast
-contrast = features.contr;
+out.Contrast = features.contr;
 
 % 3. Entropy
-entropy = features.entro;
+out.Entropy = features.entro;
 
 % 4. Correlation
-correlation = features.corrm;
+out.Correlation = features.corrm;
 
 % 5. Dissimilarity
-dissimilarity = features.dissi;
+out.Dissimilarity = features.dissi;
