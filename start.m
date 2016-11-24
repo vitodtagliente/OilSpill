@@ -13,3 +13,6 @@ s = spillseg( img );
 back = spillback( img, s );
 % Immagine di background in scala di grigi
 gback = rgb2gray( back );
+
+% Calcolo l'immagine della macchia in scala di grigi
+gspill = gimg - gback;

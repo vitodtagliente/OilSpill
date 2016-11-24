@@ -1,7 +1,11 @@
 
-function [ isd, osd ] = spillbackscatter( img, back )
+function [ isd, osd ] = spillbackscatter( spill, back )
 % Inside Slick Standard Deviation
-isd = std( img );
+isd = std( double( spill ) );
+[a b] = size( isd );
+isd = sum( isd ) / b;
 
 % Outside Slick Standard Deviation (?sce)
-osd = std( back );
+osd = std( double( back ) );
+[a b] = size( osd );
+osd = sum( osd ) / b;
