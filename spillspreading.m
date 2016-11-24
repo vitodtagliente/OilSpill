@@ -15,7 +15,7 @@
 % the expression:
 % S = 100?2 /( ?1 + ?2 ) 
 
-function [result] = spillspreading( img )
+function [spreading] = spillspreading( img )
 % Lavoriamo solo con i pixel del contorno
 [length, pimg] = spillperim( img );
 
@@ -25,3 +25,5 @@ function [result] = spillspreading( img )
 % Calcolo degli autovalori
 % e = eig( c );
 
+% TODO
+spreading = 0;
