@@ -4,15 +4,9 @@
 
 % img: immagine originale
 img = imread( 'oil.bmp' );
-% gray: immagine non segmentata in scala di grigi
-gimg = rgb2gray( img );
 % s: immagine segmentata
 s = spillseg( img );
 
-% Calcolo dell'immagine di background
-back = spillback( img, s );
-% Immagine di background in scala di grigi
-gback = rgb2gray( back );
+s2=imread('s.bmp');
 
-% Calcolo l'immagine della macchia in scala di grigi
-gspill = gimg - gback;
+
