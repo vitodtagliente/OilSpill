@@ -8,7 +8,7 @@
 
 
 
-function [ gMax, gMe, gSt]= spillgradient(I)
+function [ gMax, gMe, gSt] = spillgradient(I)
 
 %[l,bin]=spillperim(I);
 
@@ -26,9 +26,9 @@ function [ gMax, gMe, gSt]= spillgradient(I)
 [M,N]= size(I); %M n. di righe, N n. di colonne
 z=0;
 x=0;
-for j = 1:M %riga   
-    for i = 1:N    %colonna    
-        if (Gmag(j,i) ~= 0)
+for i = 1:M %riga   
+    for j = 1:N    %colonna    
+        if (Gmag(i,j) ~= 0)
            x=x+ Gmag(i,j); 
            
            z=z+1;
@@ -40,10 +40,10 @@ media=x/z;
 
 %deviazione standard
 x=0;
-for j = 1:M %riga   
-    for i = 1:N    %colonna    
-        if (Gmag(j,i) ~= 0)
-           x=x+(Gmag(j,i)- media)^2;
+for i = 1:M %riga   
+    for j = 1:N    %colonna    
+        if (Gmag(i,j) ~= 0)
+           x=x+(Gmag(i,j)- media)^2;
         end
     end
 end
