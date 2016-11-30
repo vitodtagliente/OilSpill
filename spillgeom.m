@@ -14,10 +14,26 @@ out.Area = spillarea( img );
 % geometry and larger values for complex geometrical regions.
 out.Complexity = out.Perimeter / (2 * sqrt( pi * out.Area ));
 
-% 4. Calcolo del FIPM
+% 4. Length (L): sum of skeleton edges 
+% (obtained by Delaunay triangulation),
+% that build the main line.
+
+out.Length = spilldelaunay( img );
+
+% Width (W): mean value of Delaunay triangles 
+% which are crossed by main line.
+% out.Width = ?
+
+% Length To Width Ratio (LWR)
+% out.LWR = out.Length / out.Width;
+
+% Compactness (Comp), defined as
+% out.Comp = ( out.Length * out.Width ) / out.Area;
+
+% 5. Calcolo del FIPM
 out.FIPM = spillfipm( img );
 
-% 5. Calcolo dei parametri basati sull fitting dell'ellisse
+% 6. Calcolo dei parametri basati sull fitting dell'ellisse
 % Ellipse Length: value of main axe of an ellipse fitted to the data
 % Ellipse Width: value of minor axe of an ellipse fitted to the data.
 [ out.EL, out.EW ] = spillellipfit( img );
