@@ -2,7 +2,7 @@
 %Script che estrae i vettori contenente i punti neri degli assi x e y usato
 %per la triangolazione di Delenauy
 
-function [x, y] = getVectors( img )
+function [x, y] = getvectors( img )
 
 [M,N]= size(img); %M n. di righe, N n. di colonne
 x=zeros(1, M*N); % vettore contenente tutti i valori x delle celle con valore 0, worst case di dimensioni M*N

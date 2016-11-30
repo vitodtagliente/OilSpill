@@ -1,9 +1,9 @@
 %Script che calcola la lenght usando la trinagolazione di Delaunay
 
-function [d] = spillLength( img )
+function [d] = spilllength( img )
 
 %Inizio dello script. Viene passato in input l'immagine s
-[x,y]= getVectors(img);
+[x,y]= getvectors(img);
 x=x'; % la funzione delaunayTriangolation vuole vettori colonna
 y=y';
 DT = delaunayTriangulation(x,y);
