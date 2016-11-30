@@ -15,5 +15,3 @@ back = spillback( img, s );
 gback = rgb2gray( back );
 
 gspill = gimg - gback;
-
-

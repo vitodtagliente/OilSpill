@@ -36,3 +36,17 @@ out.IRatio = out.ISRI / out.ISRO;
 
 out.ConMe = out.BackMean - out.SpillMean;
 
+%Max Gradient (GMax): maximum value (in dB) 
+% of border gradient magnitude, 
+% calculated using Sobel operator.
+
+% Mean Gradient (GMe): mean border gradient 
+% magnitude (in dB).
+
+% Gradient Standard Deviation (GSd): 
+% standard deviation (in dB) of the
+% border gradient magnitudes.
+
+[out.GMax, out.GMe, out.GSd] = spillgradient( spill );
+
+
