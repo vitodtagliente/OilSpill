@@ -1,16 +1,16 @@
-%Questa funzione prende in input una immagine binarizzata o greyscale e ne
+%Questa funzione prende in input una immagine binarizzata o grayscale e ne
 %calcola il gradiente lungo gli assi x e y (Gx e Gy) e poi calcola il G
 %magnitude e la direzione, individuandone il Massimo, la media e la dev
 %standard restiduendo i valori in dB.
 %Io ho passato sempre una immagine binarizzata, ma le funzioni imgradient e
-%imgradient xy, funzionano anche con una greyscale(da quanto dice la
+%imgradient xy, funzionano anche con una grayscale(da quanto dice la
 %documentazione di matlab)
 
 
 
 function [ gMax, gMe, gSt] = spillgradient(I)
 
-%[l,bin]=spillperim(I);
+
 
 %Calcolo il gradiente lungo le due direzioni
 %[Gx, Gy] = imgradientxy(I);
