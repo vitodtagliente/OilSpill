@@ -10,8 +10,6 @@
 
 function [ gMax, gMe, gSt] = spillgradient(I)
 
-
-
 %Calcolo il gradiente lungo le due direzioni
 %[Gx, Gy] = imgradientxy(I);
 %calcolo il G Magnitude e la direzione usando sobel (default, Gx e Gy,
