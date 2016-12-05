@@ -1,16 +1,18 @@
 
 % Utilizza questo script per preparare il Workspace di Matlab
 
+function [out] = spillbegin( filename )
+
 % img: immagine originale
-img = imread( 'oil.bmp' );
+out.img = imread( filename );
 % gimg: immagine non segmentata in scala di grigi
-gimg = rgb2gray( img );
+out.gimg = rgb2gray( out.img );
 % s: immagine segmentata
-s = spillseg( img );
+out.s = spillseg( out.img );
 
 % back: immagine di background
-back = spillback( img, s );
+out.back = spillback( out.img, out.s );
 % gback: immagine di background in scala di grigi
-gback = rgb2gray( back );
+out.gback = rgb2gray( out.back );
 % gspill: macchia di petrolio in scala di grigi
-gspill = gimg - gback;
+out.gspill = out.gimg - out.gback;
