@@ -77,8 +77,7 @@ out.SubLon = SUB_LON;
 out.subI = subI;
 out.subIDB= mag2db(subI)/2;
 out.Rect = Rect;
-out.spillMask=(out.subIDB>-20);
-out.backMask=(out.spillMask*-1)+1
+out.spillMask=
 
 %% 
 
