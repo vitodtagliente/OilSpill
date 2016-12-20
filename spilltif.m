@@ -91,6 +91,9 @@ out.backMask = (out.spillMask == 0);
 out.gback = out.gsubI .* out.spillMask;
 % Macchia di petrolio in scala di grigi
 out.gspill = out.gsubI - out.gback;
+% Macchia e background derivate da Isigma
+out.iback = out.subIdB .* out.spillMask;
+out.ispill = out.subIdB - out.iback;
 
 %% 
 
