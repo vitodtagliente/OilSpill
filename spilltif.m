@@ -67,14 +67,20 @@ end
 %% output
 
 out.Istack = Istack;
-out.Isigma = Isigma;
 out.Rs = Rs;
+% Informazioni su Isigma
+out.Isigma = Isigma;
+out.IsigmadB = mag2db(Isigma)/2;
 out.Lon = LONGITUDE;
 out.Lat = LATITUDE;
+% Informazioni sul crop di Isigma
 out.SubLat = SUB_LAT;
 out.SubLon = SUB_LON;
 out.subI = subI;
+out.SubIdB = mag2db(subI)/2;
 out.Rect = Rect;
+
+
 
 %% 
 
