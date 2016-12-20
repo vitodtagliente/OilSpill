@@ -71,17 +71,26 @@ out.Rs = Rs;
 % Informazioni su Isigma
 out.Isigma = Isigma;
 out.IsigmadB = mag2db(Isigma)/2;
+% Isigma in grayscale
+out.gIsigma = mat2gray(out.IsigmadB);
 out.Lon = LONGITUDE;
 out.Lat = LATITUDE;
 % Informazioni sul crop di Isigma
 out.SubLat = SUB_LAT;
 out.SubLon = SUB_LON;
 out.subI = subI;
-out.SubIdB = mag2db(subI)/2;
+out.subIdB = mag2db(subI)/2;
+% subI in grayscale
+out.gsubI = mat2gray(out.subIdB);
 out.Rect = Rect;
 % Maschere
-out.spillMask=(out.subIDB>-20);
-out.backMask=(out.spillMask*-1)+1
+out.spillMask = (out.subIdB >- 20);
+%out.backMask = (out.spillMask * -1) + 1;
+out.backMask = (out.spillMask == 0);
+% Background in scala di grigi
+out.gback = out.gsubI .* out.spillMask;
+% Macchia di petrolio in scala di grigi
+out.gspill = out.gsubI - out.gback;
 
 %% 
 
