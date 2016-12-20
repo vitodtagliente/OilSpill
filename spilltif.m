@@ -67,11 +67,6 @@ end
 %% output
 
 out.Istack = Istack;
-<<<<<<< HEAD
-=======
-out.Isigma = Isigma;
-out.IsigmaDB = mag2db(Isigma)/2;
->>>>>>> origin/master
 out.Rs = Rs;
 % Informazioni su Isigma
 out.Isigma = Isigma;
@@ -82,16 +77,11 @@ out.Lat = LATITUDE;
 out.SubLat = SUB_LAT;
 out.SubLon = SUB_LON;
 out.subI = subI;
-<<<<<<< HEAD
 out.SubIdB = mag2db(subI)/2;
-=======
-out.subIDB= mag2db(subI)/2;
->>>>>>> origin/master
 out.Rect = Rect;
+% Maschere
 out.spillMask=(out.subIDB>-20);
 out.backMask=(out.spillMask*-1)+1
-
-
 
 %% 
 
