@@ -84,7 +84,7 @@ out.subIdB = mag2db(subI)/2;
 out.gsubI = mat2gray(out.subIdB);
 out.Rect = Rect;
 % Maschere
-out.spillMask = (out.subIdB >- 20);
+out.spillMask = (out.subIdB >- 22);
 %out.backMask = (out.spillMask * -1) + 1;
 out.backMask = (out.spillMask == 0);
 % Background in scala di grigi
