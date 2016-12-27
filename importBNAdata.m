@@ -1,11 +1,3 @@
-%%test_ImportBNAmapFile
-%% aggiunto controllo sulle frontiere aperte 
-%% deve solo mappare le frontiere chiuse
-
-%%% case scene abeerdeen Scotland
-%GNOME_BNA='Map_AberdeenScotland.BNA'
-
-%%% case scene gulf of mexico
 function [mask] = importBNAdata()
 GNOME_BNA='Philippine coast.bna';
 
@@ -78,7 +70,7 @@ CellDataScene=Data;
 %% di 1.85x1.85 km2 in gradi 0.0167 degree
 %% scegliamo una risoluzione per la griglia raster di 1km corrisponde a 
 %% 0.00980 degree
-scaleFactor = 3;
+scaleFactor = 14.5457;
 dlon=0.00980/scaleFactor;
 dlat=0.00980/scaleFactor;
 
@@ -154,4 +146,4 @@ Ion=find(MaskBNAscene>0);
 MaskBNAscene(Ion)=1;
 
 MaskBNAscene=imcomplement(MaskBNAscene);
-mask=MaskBNAscene;
+mask=(MaskBNAscene==1);
