@@ -18,3 +18,6 @@ features.Backscatter = spillbackscatter( s.ispill, s.iback );
 
 % 3. Texture Features
 features.Texture = spilltexture( s.gspill );
+
+% 4. Context Features
+features.Context = spillcontext( s );
