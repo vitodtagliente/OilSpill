@@ -7,7 +7,7 @@ if nargin <= 1
 end
 
 %Inizio dello script. Viene passato in input l'immagine s
-[x,y]= getvectors(img);
+[x,y]= getVectors(img);
 x=x'; % la funzione delaunayTriangolation vuole vettori colonna
 y=y';
 DT = delaunayTriangulation(x,y);
