@@ -8,8 +8,6 @@ if nargin <= 1
    debug = false; 
 end
 
-% Distance from land
-
 % Calcolo delle regioni a luminosità 
 % più alta
 mask = (s.subIdB < -10);
@@ -48,5 +46,8 @@ if debug
         plot(spikes(i).Centroid(1), spikes(i).Centroid(2), 'r.', 'MarkerSize',20);
     end
 end
+% Distance from land
+coastMask=importBNAdata;    %import dei dati della costa in formato bna per zona della macchia di petrolio
+[l,coastMask]=spillperim(coastMask); %estrazione dei soli punti del perimetro della costa
 
 

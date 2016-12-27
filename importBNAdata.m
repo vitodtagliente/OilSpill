@@ -1,7 +1,3 @@
-clc
-close all
-clear all
-
 %%test_ImportBNAmapFile
 %% aggiunto controllo sulle frontiere aperte 
 %% deve solo mappare le frontiere chiuse
@@ -10,7 +6,8 @@ clear all
 %GNOME_BNA='Map_AberdeenScotland.BNA'
 
 %%% case scene gulf of mexico
-GNOME_BNA='C:\Users\alberto\Desktop\morea\OilSlick\Output.GNOME\Case00_Gulf_of_Mexico\Gulf_of_Mexico.BNA'
+function [mask] = importBNAdata()
+GNOME_BNA='Philippine coast.bna';
 
 fileID = fopen(GNOME_BNA,'r');
 
@@ -28,16 +25,16 @@ Block = 1;
 
 while (~feof(fileID))                               % For each block:
 
-   fprintf('Block: %s\n', num2str(Block))           % Print block number to the screen
+   %fprintf('Block: %s\n', num2str(Block))           % Print block number to the screen
    InputText = textscan(fileID,'%s',1,'delimiter','\n');  % Read 1 header lines
    HeaderLines{Block,1} = InputText{1};
-   disp(HeaderLines{Block});                        % Display header lines
+   %disp(HeaderLines{Block});                        % Display header lines
 
    %InputText = textscan(fileID,'Num SNR = %f');     % Read the numeric value
                                                     % following the text, Num SNR =
    %NumCols = InputText{1};                          % Specify that this is the
                                                     % number of data columns
-   NumCols = 2    
+   NumCols = 2;   
    FormatString = repmat('%f',1,NumCols);           % Create format string
                                                     % based on the number
                                                     % of columns
@@ -46,16 +43,13 @@ while (~feof(fileID))                               % For each block:
 
    Data{Block,1} = cell2mat(InputText);
    [NumRows,NumCols] = size(Data{Block});           % Determine size of table
-   disp(cellstr(['Table data size: ' ...
-      num2str(NumRows) ' x ' num2str(NumCols)]));
-   disp(' ');                                       % New line
+   %disp(cellstr(['Table data size: ' ...
+      %num2str(NumRows) ' x ' num2str(NumCols)]));
+   %disp(' ');                                       % New line
 
    %eob = textscan(fileID,'%s',1,'delimiter','\n');  % Read and discard end-of-block marker
    Block = Block+1;                                 % Increment block index
 end
-
-figure
-hold on
 
 for k=1:size(Data,1)
     
@@ -63,19 +57,17 @@ for k=1:size(Data,1)
    
  B = (any(XYbound(1,:)-XYbound(end,:)));
  if B==0
- patch(XYbound(:,1),XYbound(:,2),[0.5 0.5 0.5])   
+ %patch(XYbound(:,1),XYbound(:,2),[0.5 0.5 0.5]);   
  
  else
   %% close boundary
  XYbound1=[XYbound;XYbound(1,:)];
- plot(XYbound1(:,1),XYbound1(:,2),'r')   
   
  
  end   
     
     
 end
-hold off
 
 CellDataScene=Data;
 
@@ -87,10 +79,10 @@ CellDataScene=Data;
 %% scegliamo una risoluzione per la griglia raster di 1km corrisponde a 
 %% 0.00980 degree
 scaleFactor = 3;
-dlon=0.00980/scaleFactor
-dlat=0.00980/scaleFactor
+dlon=0.00980/scaleFactor;
+dlat=0.00980/scaleFactor;
 
-RisKM=deg2km(dlon)
+RisKM=deg2km(dlon);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% costruzione dei limiti long e limiti lat per la scena caricata
@@ -100,9 +92,9 @@ clear LON_LATmax
 for kk=1:size(Data,1)
  XYbound=Data{kk};  
  
-  xymin=min(XYbound)
+  xymin=min(XYbound);
   
-  xymax=max(XYbound)
+  xymax=max(XYbound);
   
   LON_LATmin(kk,:)=xymin;
   LON_LATmax(kk,:)=xymax;
@@ -110,13 +102,13 @@ for kk=1:size(Data,1)
   
 end
 
-minLON_LAT=min(LON_LATmin)
-maxLON_LAT=max(LON_LATmax)
+minLON_LAT=min(LON_LATmin);
+maxLON_LAT=max(LON_LATmax);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% stima delle dimensioni del raster in base al range di lat lon
-Ncol=round((maxLON_LAT(1)-(minLON_LAT(1)))/dlon)+1
-Nrow=round((maxLON_LAT(2)-minLON_LAT(2))/dlat)+1
+Ncol=round((maxLON_LAT(1)-(minLON_LAT(1)))/dlon)+1;
+Nrow=round((maxLON_LAT(2)-minLON_LAT(2))/dlat)+1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% costruzione del raster corrispondente alla BNA scene
@@ -125,7 +117,7 @@ MaskBNAscene=zeros(Nrow,Ncol);
 
 %% mapping delle land aree sul raster
 %k=10
-Precision=100*scaleFactor
+Precision=100*scaleFactor;
 
 for k=1:size(Data,1)
     %CurrentPatchMask=zeros(size(MaskBNAscene));
@@ -162,12 +154,4 @@ Ion=find(MaskBNAscene>0);
 MaskBNAscene(Ion)=1;
 
 MaskBNAscene=imcomplement(MaskBNAscene);
-
-figure,imagesc(MaskBNAscene);colormap gray
-
-minLon=minLON_LAT(1)
-minLat=minLON_LAT(2)
-maxLon=maxLON_LAT(1)
-maxLat=maxLON_LAT(2)
-
-%save('Map_GulfOFmexico.mat','CellDataScene','MaskBNAscene','minLon','minLat','maxLon','maxLat','scaleFactor')
+mask=MaskBNAscene;
