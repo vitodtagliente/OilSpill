@@ -2,9 +2,7 @@
 % Questo script si occupa di automatizzare in completo 
 % l'operazione di estrazione delle features
 
-% spill: l'immagine della macchia di petrolio in scala di grigi
-% back: sfondo dell'immagine in scala di grigi
-% seg: spill segmentato in formato binario
+% s: struttura dati ottenuta da spilltif
 
 function [ features ] = spillfeatures( s )
 

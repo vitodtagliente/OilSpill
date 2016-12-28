@@ -15,11 +15,11 @@ mask = (mask == 0);
 
 spikes = regionprops(mask, 'all');
 
-% Number of bright spots nearby
+%% Number of bright spots nearby
 dim = size(spikes);
 out.spotsCount = dim(1);
 
-%calcolo centroide della macchia di petrolio
+%% calcolo centroide della macchia di petrolio
 spill=regionprops(s.spillMask,'all');
 temp = cat(1, spill.Centroid);
 x=temp(:,1);
@@ -32,7 +32,8 @@ out.spillCropCentroid = spillCropCentroid;
 %[xmin,ymin,width,height] e si sommano le coordinate del baricentro trovato
 %a xmin e ymin (che rappresentano l'offset rispetto l'immagine di partenza
 out.spillCentroid=[spillCropCentroid(1)+s.Rect(1),spillCropCentroid(2)+s.Rect(2)];
-% Distance to next bright spot (vessel, platform)
+
+%% Distance to next bright spot (vessel, platform)
 temp=cat(1,spikes.Centroid);
 xspikes=temp(:,1);
 yspikes=temp(:,2);
@@ -51,9 +52,13 @@ if debug
         plot(spikes(i).Centroid(1), spikes(i).Centroid(2), 'r.', 'MarkerSize',20);
     end
 end
-% Distance from land
-coastMask=importBNAdata;    %import dei dati della costa in formato bna per zona della macchia di petrolio
-[l,coastMask]=spillperim(coastMask); %estrazione dei soli punti del perimetro della costa
+
+%% Distance from land
+%import dei dati della costa in formato bna 
+% per zona della macchia di petrolio
+coastMask=importBNAdata;
+%estrazione dei soli punti del perimetro della costa    
+[l,coastMask]=spillperim(coastMask); 
 if debug
     figure;
     imshow(coastMask);
@@ -62,10 +67,13 @@ if debug
 end
 
 [dimx,dimy]=size(coastMask);
-minDist=Inf;%inizializzo la distanza minima ad infinito
+%inizializzo la distanza minima ad infinito
+minDist=Inf;
 for x=1:dimx
     for y=1:dimy
-        if(coastMask(x,y))%trovato un punto in cui la maschera sia 1 = punto della costa
+        if(coastMask(x,y))
+            %trovato un punto in cui la maschera 
+            % sia 1 = punto della costa
             tempDist=sqrt((x-out.spillCentroid(1))^2+(y-out.spillCentroid(2))^2);
             if(tempDist<minDist)
                 minDist=tempDist;

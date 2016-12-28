@@ -1,4 +1,5 @@
-Con questo Carichi le immagini nella memoria di lavoro di Matlab:
+Con questo Carichi le immagini nella memoria 
+di lavoro di Matlab:
 
 >> start
 
