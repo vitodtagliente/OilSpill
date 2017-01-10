@@ -17,8 +17,8 @@ file = fopen(csvname, 'w');
 s = size(files);
 for i=1:s(1)
     if strcmp(files(i).name, '.') == 0 && strcmp(files(i).name, '..') == 0
-        o = spillbegin( sprintf('%s/%s', dataset, files(i).name) );
-        f = spillfeatures( o.gspill, o.gback, o.s );
+        o = spilltif( sprintf('%s/%s', dataset, files(i).name) );
+        f = spillfeatures(o);
         
         % Scrivi le features su csv
         g = f.Geometrical;

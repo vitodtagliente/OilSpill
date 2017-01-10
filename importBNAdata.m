@@ -63,13 +63,6 @@ end
 
 CellDataScene=Data;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% questa parte costruisce la mappa raster della scena BNA
-%% la risoluzione della linea di costa del DATABASE GSHH e 1x1 arcmin
-%% questo corrisponde in approssimazione ad una risoluzione spaziale del pixel
-%% di 1.85x1.85 km2 in gradi 0.0167 degree
-%% scegliamo una risoluzione per la griglia raster di 1km corrisponde a 
-%% 0.00980 degree
 scaleFactor = 14.5457;
 dlon=0.00980/scaleFactor;
 dlat=0.00980/scaleFactor;
