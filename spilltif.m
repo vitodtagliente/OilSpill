@@ -3,7 +3,7 @@
 % immagini TIF, modifca di quello passatoci
 % dal Professore
 
-function [out] = spilltif( filename, IdData, FLAG_Crop )
+function [out] = spilltif( filename, IdData, FLAG_Crop, CropRect )
 % il parametro debug è opzionale
 if nargin <= 1
     IdData = 1;
@@ -42,20 +42,18 @@ lon=[Rs.Lonlim(1):Rs.DeltaLon:Rs.Lonlim(2)-Rs.DeltaLon/2];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%figure,imagesc(DEM);axis image
-figure,imagesc(Isigma);axis image,colormap gray
-caxis([0 nanmean(Isigma(:))])
-
-
-
 if FLAG_Crop==1
-
-    % La seguente istruzione ci permette di eseguire
-    % il crop manuale da editor visuale
-    [subI Rect]=imcrop; 
-    % Altrimenti possiamo definire la finestra 
-    % di crop in questo modo: 
-    % imcrop(I,[75 68 130 112]);
+    if nargin >= 4
+        [subI Rect]=imcrop(Isigma, CropRect);
+    else         
+        % figure,imagesc(DEM);axis image
+        figure,imagesc(Isigma);axis image,colormap gray
+        caxis([0 nanmean(Isigma(:))])
+        % La seguente istruzione ci permette di eseguire
+        % il crop manuale da editor visuale
+        [subI Rect]=imcrop;
+    end
+     
     SUB_LAT=imcrop(LATITUDE,Rect);
     SUB_LON=imcrop(LONGITUDE,Rect);
 else
