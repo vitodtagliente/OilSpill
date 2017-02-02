@@ -22,37 +22,54 @@ lookalike.Isigma = imcrop(s.subI, lookalike.Rect);
 spill.Mask = imcrop(SlickMask, spill.Rect);
 lookalike.Mask = imcrop(SlickMask, lookalike.Rect);
 
-% Conversione in dB
-spill.dB = mag2db(spill.Isigma)/2;
-lookalike.dB = mag2db(lookalike.Isigma)/2;
-
-% Conversione in scala di grigi
-spill.grayscale = mat2gray(spill.dB);
-lookalike.grayscale = mat2gray(lookalike.dB);
-
 % Calcolo della maschera del background
 spill.foreMask = (spill.Mask == 0);
 lookalike.foreMask = (lookalike.Mask == 0);
 
-% Calcolo del background in scala di grgi
-spill.gforeground = spill.grayscale .* spill.foreMask;
-lookalike.gforeground = lookalike.grayscale .* lookalike.foreMask;
-
-% Calcolo della macchia in scala di grigi
-spill.gspill = spill.grayscale - spill.gforeground;
-lookalike.gspill = lookalike.grayscale - lookalike.gforeground;
-
-% Calcolo del background in dB
-spill.foredB = spill.dB .* spill.foreMask;
-lookalike.foredB = lookalike.dB .* lookalike.foreMask;
-
-% Calcolo della macchia in dB
-spill.spilldB = spill.dB - spill.foredB;
-lookalike.spilldB = lookalike.dB - lookalike.foredB;
-
 % Estrazione delle proprietà della figura
 spill.props = regionprops( spill.Mask, 'all' );
 lookalike.props = regionprops( lookalike.Mask, 'all' );
+
+% Calcolo dei BBox
+spill.BBox = spill.props.BoundingBox;
+spill.BBox(1)=spill.BBox(1)-10;
+spill.BBox(2)=spill.BBox(2)-10;
+spill.BBox(3)=spill.BBox(3)+20;
+spill.BBox(4)=spill.BBox(4)+20;
+spill.BBoxImage = imcrop(spill.Isigma, spill.BBox );
+
+lookalike.BBox = lookalike.props.BoundingBox;
+lookalike.BBox(1)=lookalike.BBox(1)-10;
+lookalike.BBox(2)=lookalike.BBox(2)-10;
+lookalike.BBox(3)=lookalike.BBox(3)+20;
+lookalike.BBox(4)=lookalike.BBox(4)+20;
+lookalike.BBoxImage = imcrop(lookalike.Isigma, lookalike.BBox );
+
+% Ridimensionamento delle maschere
+spill.bbMask = imcrop(spill.Mask, spill.BBox);
+lookalike.bbMask = imcrop(lookalike.Mask, lookalike.BBox);
+spill.bbforeMask = (spill.bbMask == 0);
+lookalike.bbforeMask = (lookalike.bbMask == 0);
+
+% Conversione in dB
+spill.dB = mag2db(spill.Isigma)/2;
+lookalike.dB = mag2db(lookalike.Isigma)/2;
+spill.bbdB = mag2db(spill.BBoxImage)/2;
+lookalike.bbdB = mag2db(lookalike.BBoxImage)/2;
+
+% Calcolo del background in dB
+spill.foredB = spill.bbdB .* spill.bbforeMask;
+lookalike.foredB = lookalike.bbdB .* lookalike.bbforeMask;
+
+% Calcolo della macchia in dB
+spill.spilldB = spill.bbdB - spill.foredB;
+lookalike.spilldB = lookalike.bbdB - lookalike.foredB;
+
+% Conversione in scala di grigi
+spill.grayscale = mat2gray(spill.bbdB);
+lookalike.grayscale = mat2gray(lookalike.bbdB);
+
+% #######################################
 
 % Fetures geometriche
 spill.geom = spillgeom( spill.Mask );
@@ -78,8 +95,8 @@ rectangle('Position', lookalike.props.BoundingBox, 'EdgeColor', 'b', 'LineWidth'
 hold off;
 
 % Features Texture
-spill.texture = spilltexture( spill.gspill );
-lookalike.texture = spilltexture( lookalike.gspill );
+spill.texture = spilltexture( spill.grayscale );
+lookalike.texture = spilltexture( lookalike.grayscale );
 
 % Features Backscatter
 spill.backscatter = spillbackscatter( spill.spilldB, spill.foredB ); 
