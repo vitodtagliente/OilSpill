@@ -102,9 +102,51 @@ lookalike.texture = spilltexture( lookalike.grayscale );
 spill.backscatter = spillbackscatter( spill.spilldB, spill.foredB ); 
 lookalike.backscatter = spillbackscatter( lookalike.spilldB, lookalike.foredB );
 
+% Features Backscatter di confronto
+spill.extra.LocalContrast = spill.backscatter.BackMean - spill.backscatter.SpillMean;
+lookalike.extra.LocalContrast = lookalike.backscatter.BackMean - lookalike.backscatter.SpillMean;
 
+spill.extra.WindowHomogeneity = spill.backscatter.BackStandardDeviation - spill.backscatter.BackMean;
+lookalike.extra.WindowHomogeneity = lookalike.backscatter.BackStandardDeviation - lookalike.backscatter.BackMean;
 
+spill.extra.SlickHomogeneity = spill.backscatter.SpillStandardDeviation - spill.backscatter.SpillMean;
+lookalike.extra.SlickHomogeneity = lookalike.backscatter.SpillStandardDeviation - lookalike.backscatter.SpillMean;
 
+% Features Ancillari
 
+SpikeCenterList = 1.0e+03 *[
+0.579675930200000 0.999716705270131
+0.840660709104075 0.905354539480441
+0.941961252345276 0.181831165539384
+1.676143092474878 1.260116949458680];
 
+v = regionprops(SlickMask, 'all' );
+spill.context.x = v(1).Centroid(1);
+spill.context.y = v(1).Centroid(2);
+
+xspikes = SpikeCenterList(:,1) - spill.context.x;
+yspikes = SpikeCenterList(:,2) - spill.context.y;
+
+dist = (xspikes).^2 + (yspikes).^2;
+spill.context.MinDistance =  min( sqrt( dist ) );
+
+lookalike.context.x = v(2).Centroid(1);
+lookalike.context.y = v(2).Centroid(2);
+
+xspikes = SpikeCenterList(:,1) - lookalike.context.x;
+yspikes = SpikeCenterList(:,2) - lookalike.context.y;
+
+dist = (xspikes).^2 + (yspikes).^2;
+lookalike.context.MinDistance =  min( sqrt( dist ) );
+
+%%
+figure;
+imshow(SlickMask);
+hold on;
+plot(spill.context.x, spill.context.y, 'g.', 'MarkerSize', 20);
+plot(lookalike.context.x, lookalike.context.y, 'g.', 'MarkerSize', 20);
+for i=1:4
+    plot(SpikeCenterList(i, 1), SpikeCenterList(i, 2), 'r.', 'MarkerSize',20);
+end
+%%
 
