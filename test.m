@@ -4,9 +4,13 @@
 load('Test.mat');
 s = spilltif('Test.tif', 1, 1, Rect );
 
-% imshow( s.gsubI );
+% Mostra il crop in scala di grigi
+figure;
+imshow( s.gsubI );
 
-% hist(double(s.subIdB(:)),500);
+% Mostra l'istogramma in dB
+figure;
+hist(double(s.subIdB(:)),500);
 
 % --------- Pre-processing delle macchie
 
@@ -85,6 +89,7 @@ hold on;
 imshow(spill.Mask);
 plot(spill.props.Centroid(1), spill.props.Centroid(2), 'g.', 'MarkerSize', 20);
 rectangle('Position', spill.props.BoundingBox, 'EdgeColor', 'b', 'LineWidth', 2);
+rectangle('Position', spill.BBox, 'EdgeColor', 'r', 'LineWidth', 2);
 hold off;
 
 subplot(1,2,2);
@@ -92,6 +97,7 @@ hold on;
 imshow(lookalike.Mask);
 plot(lookalike.props.Centroid(1), lookalike.props.Centroid(2), 'g.', 'MarkerSize', 20);    
 rectangle('Position', lookalike.props.BoundingBox, 'EdgeColor', 'b', 'LineWidth', 2);
+rectangle('Position', lookalike.BBox, 'EdgeColor', 'r', 'LineWidth', 2);
 hold off;
 
 % Features Texture
