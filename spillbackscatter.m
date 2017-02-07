@@ -1,31 +1,31 @@
 
 function [ out ] = spillbackscatter( spill, back )
 % Inside Slick Standard Deviation
-out.SpillStandardDeviation = mean (std( double( spill ) ) );
+out.SpillStandardDeviation = std2( spill );
 
 % Inside Slick Radar Backcatter
-out.SpillMean = mean( mean( spill ) );
+out.SpillMean = mean2( spill );
 
 % Outside Slick Standard Deviation (?sce)
-out.BackStandardDeviation = mean( std( double( back ) ) );
+out.BackStandardDeviation = std2( back );
 
 % Outside Slick Radar Backscatter (?sce)
-out.BackMean = mean( mean( back ) );
+out.BackMean = mean2( back );
 
 % Intensity Ratio
-out.IntensityRatio = out.SpillMean / out.BackMean;
+out.IntensityRatio = out.SpillMean - out.BackMean; % / - 
 
 % Intensity Standard Deviation Ratio
-out.ISDR = out.SpillStandardDeviation / out.BackStandardDeviation;
+out.ISDR = out.SpillStandardDeviation - out.BackStandardDeviation; % / - 
 
 % Intensity Standard Deviation Ratio Inside (ISRI)
-out.ISRI = out.SpillMean / out.SpillStandardDeviation;
+out.ISRI = out.SpillMean - out.SpillStandardDeviation; % / - 
 
 % Intensity Standard Deviation Ratio Outside (ISRO)
-out.ISRO = out.BackMean / out.BackStandardDeviation;
+out.ISRO = out.BackMean - out.BackStandardDeviation; % / - 
 
 % ISRI ISRO Ratio
-out.IRatio = out.ISRI / out.ISRO;
+out.IRatio = out.ISRI - out.ISRO; % / - 
 
 
 
