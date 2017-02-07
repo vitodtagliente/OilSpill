@@ -105,18 +105,18 @@ spill.texture = spilltexture( spill.grayscale );
 lookalike.texture = spilltexture( lookalike.grayscale );
 
 % Features Backscatter
-spill.backscatter = spillbackscatter( spill.spilldB, spill.foredB ); 
+spill.backscatter = spillbackscatter( spill.spilldB, spill.foredB );
 lookalike.backscatter = spillbackscatter( lookalike.spilldB, lookalike.foredB );
 
 % Features Backscatter di confronto
-spill.extra.LocalContrast = spill.backscatter.BackMean - spill.backscatter.SpillMean;
-lookalike.extra.LocalContrast = lookalike.backscatter.BackMean - lookalike.backscatter.SpillMean;
+spill.backscatter.LocalContrast = spill.backscatter.BackMean - spill.backscatter.SpillMean;
+lookalike.backscatter.LocalContrast = lookalike.backscatter.BackMean - lookalike.backscatter.SpillMean;
 
-spill.extra.WindowHomogeneity = spill.backscatter.BackStandardDeviation - spill.backscatter.BackMean;
-lookalike.extra.WindowHomogeneity = lookalike.backscatter.BackStandardDeviation - lookalike.backscatter.BackMean;
+spill.backscatter.WindowHomogeneity = spill.backscatter.BackStandardDeviation - spill.backscatter.BackMean;
+lookalike.backscatter.WindowHomogeneity = lookalike.backscatter.BackStandardDeviation - lookalike.backscatter.BackMean;
 
-spill.extra.SlickHomogeneity = spill.backscatter.SpillStandardDeviation - spill.backscatter.SpillMean;
-lookalike.extra.SlickHomogeneity = lookalike.backscatter.SpillStandardDeviation - lookalike.backscatter.SpillMean;
+spill.backscatter.SlickHomogeneity = spill.backscatter.SpillStandardDeviation - spill.backscatter.SpillMean;
+lookalike.backscatter.SlickHomogeneity = lookalike.backscatter.SpillStandardDeviation - lookalike.backscatter.SpillMean;
 
 % Features Ancillari
 

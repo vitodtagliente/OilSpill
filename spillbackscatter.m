@@ -1,16 +1,13 @@
 
 function [ out ] = spillbackscatter( spill, back )
+
+% Inside Slick Mean
 % Inside Slick Standard Deviation
-out.SpillStandardDeviation = std2( spill );
-
-% Inside Slick Radar Backcatter
-out.SpillMean = mean2( spill );
-
-% Outside Slick Standard Deviation (?sce)
-out.BackStandardDeviation = std2( back );
+[out.SpillMean, out.SpillStandardDeviation] = spillutils( spill );
 
 % Outside Slick Radar Backscatter (?sce)
-out.BackMean = mean2( back );
+% Outside Slick Standard Deviation (?sce)
+[out.BackMean, out.BackStandardDeviation] = spillutils( back );
 
 % Intensity Ratio
 out.IntensityRatio = out.SpillMean - out.BackMean; % / - 
